@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-2">
+        <input type="file" class="dropify" name="foto" data-default-file="<% if(result.foto) { %><%= '/fotos-usuarios/'+result.id+'/'+result.foto%><% }else{ %>/img/sem-foto.jpg<% } %>"/>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <input type="text" hidden value="<%= result.id %>" class="form-control" id="id" name="id" />
+    <div class="col-6">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" value="<%= result.nome %>" class="form-control" id="nome" name="nome" />
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <select class="form-control" id="tipo" name="tipo">
+                <option value="">Selecione</option>
+                <option <%= result.tipo == "AD" ? 'selected' : '' %> value="AD">Administrador</option>
+                <option <%= result.tipo == "NM" ? 'selected' : '' %> value="NM">Normal</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" value="<%= result.email %>" class="form-control" id="email" name="email" />
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" value="" class="form-control" id="senha" name="senha" />
+        </div>
+    </div>
+</div>
+<script src="/assets/js/shared/dropify.js"></script>

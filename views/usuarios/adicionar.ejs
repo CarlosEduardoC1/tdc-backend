@@ -1,0 +1,34 @@
+<%- include('../layouts/_head') %>
+<%- include('../layouts/_navbar') %>
+<%- include('../layouts/_sidebar') %>
+<div class="row">
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+         <div class="card-body">
+          <h3 class="card-title">Adicionar Usuário</h3>
+          <hr>
+          <% if(typeof erros != 'undefined' ){ %>
+          <div class="alert alert-danger" role="alert">Por favor, preencha os campos em vermelho. </div>
+            <% for(var i = 0 ; i < erros.length ; i++){ %>
+              <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#<%= erros[i].param %>").addClass(" border-danger");
+                });
+              </script>
+            <% } %>		
+          <% } %>
+          <form action="/usuarios/salvar" method="POST" enctype="multipart/form-data">
+          <%- include('./_form') %> 
+          <hr>
+          <div class="container-fluid">
+            <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-primary text-white btn-fw float-right mb-4" type="submit">Salvar</button>
+                    </div>
+                </div>
+            </div>            
+          </form>
+         </div>
+    </div>
+</div>
+<%- include('../layouts/_footer') %>

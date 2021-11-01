@@ -1,0 +1,55 @@
+<%- include('../layouts/_head') %>
+<%- include('../layouts/_navbar') %>
+<%- include('../layouts/_sidebar') %>
+<div class="row">
+<div class="col-md-12 grid-margin stretch-card">
+
+    <div class="card">
+         <div class="card-body">
+          <h4 class="card-title">Usuários</h4>
+             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <a class="btn btn-primary text-white btn-fw float-right mb-4" href="/usuarios/adicionar">Adicionar</a>
+                    </div>
+                </div>
+             </div>
+             <div class="row">
+                <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Email</th>
+                        <th>Ação</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% results.forEach(function(result, key){ %>
+                        <tr>
+                            <td><%= result.id %></td>
+                            <td>
+                                <div class="col-md-1">
+                                <img class="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" 
+                                src="<% if(result.foto) { %><%= '/fotos-usuarios/'+result.id+'/'+result.foto%><% }else{ %>/img/sem-foto.jpg<% } %>" alt="profile image">
+                                </div>
+                            </td>
+                            <td><%= result.nome %></td>
+                            <td><%= result.tipo %></td>
+                            <td><%= result.email %></td>
+                            <td>
+                                <a href="/usuarios/editar/<%= result.id %>"><i class="mdi mdi-24px mdi-lead-pencil"></i></a>
+                                <a href="/usuarios/deletar/<%= result.id %>"><i class="mdi mdi-24px mdi-delete-forever"></i></a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+                </table>
+            </div>
+            </div>
+     </div>
+</div>
+  </div>
+  <%- include('../layouts/_footer') %>

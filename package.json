@@ -1,0 +1,50 @@
+{
+  "name": "gerente-wp-api-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "base-64": "^1.0.0",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-session-sequelize": "^6.0.0",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^6.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "html-pdf": "^3.0.1",
+    "http-errors": "~1.6.2",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.29.1",
+    "morgan": "~1.9.0",
+    "multer": "^1.4.1",
+    "mysql2": "^2.2.5",
+    "node-fetch": "^2.6.1",
+    "nodemailer": "^6.1.0",
+    "nodemon": "^2.0.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.8.0",
+    "pg-hstore": "^2.3.2",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0",
+    "socket.io": "^2.1.1",
+    "uuid": "^8.2.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "@types/multer": "^1.3.7",
+    "typescript": "^3.3.1"
+  }
+}
