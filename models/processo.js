@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         pedido: DataTypes.STRING,
         info_adicionais: DataTypes.STRING,
         dano_pretendido: DataTypes.STRING,
-        lo_status: DataTypes.STRING
+        status: DataTypes.STRING,
+        numProcesso: DataTypes.STRING
     }, {
         timestamps: true
     });

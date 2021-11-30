@@ -11,17 +11,24 @@ var ProcessosRepository = {
         return models.processos.create(body).then(retorno => { return retorno });
     },
     getProcess: async (params) => {
-        return models.processos.findAll({ include: [{
-            model: models.users, as: "PrcUsr", where: { id: params.usr }
-        }] }).then(response => { return response });
+        return models.processos.findAll({
+            include: [{
+                model: models.users, as: "PrcUsr", where: { id: params.usr }
+            }]
+        }).then(response => {
+
+            console.log(response);
+
+            return response
+        });
     },
 
-    update: async (body, params) => {
-        return models.processos.update(body, { whre: { id: params.processo, id_user: params.usr } }).then(response => { return response });
+    update: async (body) => {
+        return models.processos.update(body, { where: { id: body.id_processo } }).then(response => { return response });
     },
 
     delete: async (params) => {
-        return models.processos.destroy({ whre: { id: params.id } }).then(response => { return response });
+        return models.processos.destroy({ where: { id: params.id } }).then(response => { return response }).catch(err => { console.log(err); return err })
     }
 
 }

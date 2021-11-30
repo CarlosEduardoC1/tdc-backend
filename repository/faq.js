@@ -21,8 +21,6 @@ var UsuarioRepository = {
         else {
             return models.faq.create(body).then(response => { return response });
         }
-        // return true;
-        // return models.faq.create(body).then(response => { return response });
     }
 }
 

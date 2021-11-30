@@ -32,6 +32,8 @@ exports.save = async (req, res, next) => {
     let selfie = req.body.img.selfie;
     delete req.body.dados.profile;
 
+    console.log(req.body.dados);
+
     let retorno = await repository.saveUser(req.body);
     if (retorno) {
         let nome_arquivo1 = retorno.dataValues.id + '_perfil.txt';

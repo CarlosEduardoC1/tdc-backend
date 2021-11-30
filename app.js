@@ -10,6 +10,7 @@ const session = require('express-session');
 var sequelize = require('./models/index');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 var auth = require("./middlewares/auth-jwt")();
+const ngrok = require('ngrok');
 
 var authRouter = require('./routes/auth');
 var recuperarSenhaRouter = require('./routes/recuperarsenha');
@@ -19,6 +20,7 @@ var usersRouter = require('./routes/users');
 var processosRouter = require('./routes/processos');
 var viaCepRouter = require('./routes/viacep');
 var chatRouter = require('./routes/faq');
+var filesRouter = require('./routes/files');
 
 var app = express();
 var http = require('http').Server(app);
@@ -60,12 +62,16 @@ app.use('/recuperarsenha', recuperarSenhaRouter);
 app.use('/processos', processosRouter);
 app.use('/cep', viaCepRouter);
 app.use('/chat', chatRouter);
-
+app.use('/files', filesRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
+(async function() {
+  const url = await ngrok.connect(5000);
+  console.log(url);
+})();
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
