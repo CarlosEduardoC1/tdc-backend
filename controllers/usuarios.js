@@ -54,7 +54,7 @@ exports.save = async (req, res, next) => {
 
         await models.img_identificacao.create({ id_user: retorno.dataValues.id, img_identidade: nome_arquivo2, img_selfie: nome_arquivo3 });
 
-        await Utils.enviaConfirmacao(req.body.dados.email);
+        // await Utils.enviaConfirmacao(req.body.dados.email);
         res.status(200).json(retorno);
     }
     else {
@@ -73,7 +73,6 @@ exports.getUserData = async (req, res, next) => {
                 }]
             }).then(response => { return response });
             delete processo.rows;
-
             let caminho = "usuarios/imagens/" + req.params.id + "_perfil.txt";
             await fs.readFile(caminho, 'utf8', (err, data) => {
                 if (err) {
@@ -81,6 +80,44 @@ exports.getUserData = async (req, res, next) => {
                 } else {
                     result.profile = data;
                     res.status(200).json({ result, processo });
+                }
+            });
+
+        })
+        .catch((error) => { console.log(error); res.status(400).json({ msg: "Erro ao buscar dados" }) });
+
+
+}
+
+exports.getUserInfo = async (req, res, next) => {
+    await models.users.findOne({ where: { id: req.params.id } })
+        .then(async (result) => {
+
+            let caminho = "usuarios/imagens/" + req.params.id + "_perfil.txt";
+            let caminho2 = "usuarios/imagens/" + req.params.id + "_id.txt";
+            let caminho3 = "usuarios/imagens/" + req.params.id + "_selfie.txt";
+
+            await fs.readFile(caminho, 'utf8', async (err, data_profile) => {
+                if (err) {
+                    console.log(caminho);
+                    res.status(200).json({ result });
+                } else {
+                    await fs.readFile(caminho2, 'utf8', async (err, data_id) => {
+                        if (err) {
+                            res.status(200).json({ result });
+                        } else {
+                            await fs.readFile(caminho3, 'utf8', async (err, data_selfie) => {
+                                if (err) {
+                                    console.log("IF");
+                                    res.status(200).json({ result });
+                                } else {
+                                    result.profile = data_profile;
+                                    result.id_user = data_id;
+                                    res.status(200).json({ result, data_selfie });
+                                }
+                            });
+                        }
+                    });
                 }
             });
 
@@ -144,11 +181,11 @@ exports.listarUsuario = async (req, res, next) => {
 
     var results = await repository.listar(req.body, req.headers);
     if (results) {
-        log.writeNEmpresas(req.headers, "Listou os usuário", "Usuários listados com sucesso");
+        // log.writeNEmpresas(req.headers, "Listou os usuário", "Usuários listados com sucesso");
         res.status(200).json(results);
     }
     else {
-        log.writeNEmpresas(req.headers, "Listou os usuário", "Erro ao listar usuários");
+        // log.writeNEmpresas(req.headers, "Listou os usuário", "Erro ao listar usuários");
         res.status(400).json({ msg: "Falha ao buscar usuário.", status: 400 });
     }
 }

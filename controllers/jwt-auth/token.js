@@ -30,7 +30,7 @@ exports.post = async (req, res, next) => {
                 var token = jwt.encode(payload, cfg.jwtSecret);
                 user.password = undefined;
                 delete user.password;
-                res.status(200).json({ msg: "autenticado", status: 200, token: token, id: user.id, nome: user.name });;
+                res.status(200).json({ msg: "autenticado", status: 200, token: token, id: user.id, nome: user.name, mail: user.email });;
             })
         } else {
             return res.status(400).json({ msg: "Falha. else 1", status: 400 });

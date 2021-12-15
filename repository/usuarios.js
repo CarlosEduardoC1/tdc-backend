@@ -18,18 +18,12 @@ var UsuarioRepository = {
 
     listar: async (body, headers) => {
 
-        const { name, email, type } = body;
-        const where = {};
-        where.id = { [Op.in]: idUsr };
 
-        if (name) where.name = { [Op.like]: `%${name}%` };
-        if (email) where.email = { [Op.like]: `%${email}%` };
-        if (type) where.type = type;
         return models.users.findAndCountAll({
             attributes: { exclude: ['password'] },
-            limit: limit,
-            offset: offset,
-            where
+            // limit: limit,
+            // offset: offset,
+            // where
         }).then(async (result) => { return result; })
     },
 

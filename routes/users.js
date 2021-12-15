@@ -10,5 +10,6 @@ router.delete('/:id',   controller.deletar);
 router.post('/lista',   controller.listarUsuario);
 router.post('/', controller.save);
 router.get('/get-my/data/:id',   controller.getUserData);
+router.get('/get/infos/:id', controller.getUserInfo);
 
 module.exports = router;
