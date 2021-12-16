@@ -32,7 +32,7 @@ exports.save = async (req, res, next) => {
     let selfie = req.body.img.selfie;
     delete req.body.dados.profile;
 
-    console.log(req.body.dados);
+    // console.log(req.body.dados);
 
     let retorno = await repository.saveUser(req.body);
     if (retorno) {
@@ -55,6 +55,7 @@ exports.save = async (req, res, next) => {
         await models.img_identificacao.create({ id_user: retorno.dataValues.id, img_identidade: nome_arquivo2, img_selfie: nome_arquivo3 });
 
         // await Utils.enviaConfirmacao(req.body.dados.email);
+        console.log(retorno);
         res.status(200).json(retorno);
     }
     else {
