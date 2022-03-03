@@ -7,6 +7,7 @@ var logger = require('morgan');
 var validator = require('express-validator');
 const passport = require('passport');
 const session = require('express-session');
+const fs = require('fs');
 var sequelize = require('./models/index');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 var auth = require("./middlewares/auth-jwt")();
@@ -69,8 +70,8 @@ app.use(function (req, res, next) {
 });
 
 (async function() {
-  const url = await ngrok.connect(5000);
-  console.log(url);
+  const url = await ngrok.connect(3080);
+  fs.writeFileSync("programming.txt", url);
 })();
 // error handler
 app.use(function (err, req, res, next) {

@@ -3,8 +3,6 @@ var models = require('../models');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
 const Op = models.sequelize.Op;
-var cfg = require("../config/config-jwt");
-var jwt = require("jwt-simple");
 
 var UsuarioRepository = {
 
@@ -17,13 +15,18 @@ var UsuarioRepository = {
     },
 
     listar: async (body, headers) => {
+        console.log(body);
+        const { cpf, type } = body
+        const where = {};
+        if (cpf) where.cpf = { [Op.like]: `%${cpf}%` };
+        if (type) where.type = type;
 
 
         return models.users.findAndCountAll({
             attributes: { exclude: ['password'] },
             // limit: limit,
             // offset: offset,
-            // where
+            where
         }).then(async (result) => { return result; })
     },
 
