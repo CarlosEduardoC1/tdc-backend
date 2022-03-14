@@ -11,7 +11,6 @@ const fs = require('fs');
 var sequelize = require('./models/index');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 var auth = require("./middlewares/auth-jwt")();
-const ngrok = require('ngrok');
 
 var authRouter = require('./routes/auth');
 var recuperarSenhaRouter = require('./routes/recuperarsenha');
@@ -22,6 +21,7 @@ var processosRouter = require('./routes/processos');
 var viaCepRouter = require('./routes/viacep');
 var chatRouter = require('./routes/faq');
 var filesRouter = require('./routes/files');
+var dashRouter = require('./routes/dashboard');
 
 var app = express();
 var http = require('http').Server(app);
@@ -64,16 +64,12 @@ app.use('/processos', processosRouter);
 app.use('/cep', viaCepRouter);
 app.use('/chat', chatRouter);
 app.use('/files', filesRouter);
+app.use('/dashboard', dashRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-(async function() {
-  const url = await ngrok.connect(3080);
-  fs.writeFileSync("programming.txt", url);
-})();
-// error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;

@@ -11,6 +11,9 @@ var ProcessosRepository = {
         return models.processos.create(body).then(retorno => { return retorno });
     },
     getProcess: async (params) => {
+
+
+
         return models.processos.findAll({
             include: [{
                 model: models.users, as: "PrcUsr", where: { id: params.usr }
@@ -21,6 +24,11 @@ var ProcessosRepository = {
 
             return response
         });
+    },
+
+    getFrontProcess: async (body) => {
+        return models.processos.findAndCountAll()
+            .then(response => { return { response } });
     },
 
     update: async (body) => {

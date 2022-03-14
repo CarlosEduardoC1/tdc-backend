@@ -5,6 +5,7 @@ var auth = require("../middlewares/auth-jwt")();
 
 router.post('/create/process',   controller.create);
 router.get('/get/:usr',   controller.getUsr);
+router.post('/get/',   controller.getFrontProcess);
 router.put('/update/process',   controller.updateProcess);
 // router.put('/atualiza',   controller.atualizar);
 router.delete('/drop-process/:id/:id_user',   controller.deletar);

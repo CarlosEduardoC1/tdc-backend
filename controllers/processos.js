@@ -9,6 +9,7 @@ var fs = require('fs');
 const path = require('path');
 
 exports.create = async (req, res, next) => {
+    console.log(req.body);
     let files = req.body.files;
     let names = req.body.names;
 
@@ -38,6 +39,11 @@ exports.create = async (req, res, next) => {
 
 exports.getUsr = async (req, res, next) => {
     const response = await repository.getProcess(req.params);
+    response ? res.status(200).json(response) : res.status(400).json({ msg: "Não foi possivel encontrar o processo", status: 400 });
+}
+
+exports.getFrontProcess = async (req, res, next) => {
+    const response = await repository.getFrontProcess(req.body);
     response ? res.status(200).json(response) : res.status(400).json({ msg: "Não foi possivel encontrar o processo", status: 400 });
 }
 
